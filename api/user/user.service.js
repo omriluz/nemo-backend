@@ -88,8 +88,8 @@ async function add(user) {
             username: user.username,
             password: user.password,
             fullname: user.fullname,
-            //need to implement first 
-            // imgUrl: user.imgUrl,
+            //CHANGE THIS AFTER TESTING DONE 
+            imgUrl: "https://thispersondoesnotexist.com/image"
         }
         const collection = await dbService.getCollection(COLLECTION_NAME)
         await collection.insertOne(userToAdd)
