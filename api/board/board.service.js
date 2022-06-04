@@ -68,6 +68,7 @@ async function add(board) {
             archivedAt: null,
             createdAt: Date.now(),
             // later will be either image or color
+            labelOpenState:false,
             style: board.style,
             labels: [
                 {

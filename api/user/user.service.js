@@ -71,6 +71,7 @@ async function update(user) {
         const userToSave = {
             _id: ObjectId(user._id), // needed for the returnd obj
             fullname: user.fullname,
+            mentions: user.mentions
         }
         const collection = await dbService.getCollection(COLLECTION_NAME)
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
@@ -89,7 +90,8 @@ async function add(user) {
             password: user.password,
             fullname: user.fullname,
             //CHANGE THIS AFTER TESTING DONE 
-            imgUrl: "https://thispersondoesnotexist.com/image"
+            imgUrl: "https://thispersondoesnotexist.com/image",
+            mentions:[]
         }
         const collection = await dbService.getCollection(COLLECTION_NAME)
         await collection.insertOne(userToAdd)
