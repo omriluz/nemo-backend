@@ -57,14 +57,21 @@ async function update(board) {
 
 
 
-async function add(board) {
-    console.log('got here and board is', board);
+async function add(board, loggedinUser) {
+    const userObjectToAdd = {
+        _id: ObjectId(loggedinUser._id),
+        username:loggedinUser.username,
+       fullname:loggedinUser.fullname,
+       imgUrl:loggedinUser.imgUrl
+    }
     try {
         const boardToAdd = {
             // byUserId: ObjectId(review.byUserId),
             // aboutUserId: ObjectId(review.aboutUserId),
             title: board.title,
             isStar: false,
+            createdBy:userObjectToAdd,
+            members:[userObjectToAdd],
             archivedAt: null,
             createdAt: Date.now(),
             // later will be either image or color
