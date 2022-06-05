@@ -6,7 +6,6 @@ const boardService = require('./board.service')
 const utilService = require('../../services/util.service')
 
 async function getBoards(req, res) {
-    console.log('got to getboards');
     try {
         const boards = await boardService.query(req.query)
         res.send(boards)
@@ -33,18 +32,16 @@ async function removeBoard(req, res) {
 
 
 async function addBoard(req, res) {
-    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
-    console.log('req.body',req.body);
+    loggedinUser = !req.cookies.loginToken ? {
+            fullname:'guest',
+            username:'guest',
+            imgUrl:'https://www.computerhope.com/jargon/g/guest-user.jpg'
+        } : authService.validateToken(req.cookies.loginToken)
 
     try {
         var board = req.body
-        // board.createdBy = loggedinUser
-        // board.members = [{ loggedinUser }]
-        board.createdBy = 'dd'
-        board.members = [{ userflame:'fdijasfjsio' }]
-
-
-        boardFromDB = await boardService.add(board)
+        boardFromDB = await boardService.add(board, loggedinUser)
+        
         // User info is saved also in the login-token, update it
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
