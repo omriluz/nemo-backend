@@ -37,7 +37,6 @@ async function addBoard(req, res) {
             username:'guest',
             imgUrl:'https://www.computerhope.com/jargon/g/guest-user.jpg'
         } : authService.validateToken(req.cookies.loginToken)
-        console.log('@#!#@!#@!',loggedinUser);
 
     try {
         var board = req.body
