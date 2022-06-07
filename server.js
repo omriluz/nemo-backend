@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const http = require('http').createServer(app)
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 // Express App Config
 app.use(cookieParser())
