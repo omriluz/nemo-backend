@@ -14,7 +14,8 @@ async function query(filterBy = {}) {
         const boards = await collection.find(criteria).toArray()
         return boards 
     } catch (err) {
-        logger.error('cannot find boards', err)
+        // logger.error('cannot find boards', err)
+        console.log('cannot find boards', err)
         throw err
     }
 
