@@ -15,17 +15,22 @@ function setupSocketAPI(http) {
         })
 
         socket.on('join-board', boardId => {
-            console.log('join')
-            if (socket.myBoardId === boardId) return;
-            if (socket.myBoardId) {
-                socket.leave(socket.myBoardId);
+            console.log('joined board with id: ', boardId)
+            if (socket.boardId === boardId) return;
+            if (socket.boardId) {
+                socket.leave(socket.boardId);
             }
             socket.join(boardId);
-            socket.myBoardId = boardId;
+            socket.boardId = boardId;
         });
-        socket.on('board-change', updatedBoard => {
-            console.log('Emitting board change');
-            socket.broadcast.to(socket.myBoardId).emit('updated-board', updatedBoard);
+        socket.on('board-change', (updatedBoard) => {
+            // excludedSocket.broadcast.to(room).emit(type, data)
+            // async function broadcast({ type, data, room = null, userId }) {
+            console.log('hey new board');
+            gIo.to(socket.boardId).emit('update-board', updatedBoard)
+            // broadcast( )
+            // console.log('Emitting board change');
+            // broadcast('board-change').to(socket.boardId).emit('updated-board', updatedBoard);
         });
 
         socket.on('new-board', () => {
