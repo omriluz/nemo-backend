@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const http = require('http').createServer(app)
 
+app.use(express.static('public'))
+
 // Express App Config
 app.use(cookieParser())
 app.use(express.json({limit: '50mb'}))
